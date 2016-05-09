@@ -107,6 +107,32 @@ void Trigger_WeaponGiver::Render()
 
 		break;
 
+	  case type_revolver:
+		{
+		    gdi->BlackBrush();
+		    gdi->BlackPen();
+			const double sz = 2.0;
+			gdi->Circle(Pos().x - sz, Pos().y, sz);
+			gdi->Circle(Pos().x + sz, Pos().y, sz);
+			gdi->Circle(Pos().x - sz / 2.0, Pos().y + sz / 2.0, sz);
+			gdi->Circle(Pos().x + sz / 2.0, Pos().y + sz / 2.0, sz);
+			gdi->Circle(Pos().x - sz / 2.0, Pos().y - sz / 2.0, sz);
+			gdi->Circle(Pos().x + sz / 2.0, Pos().y - sz / 2.0, sz);
+		}
+
+		break;
+
+	  case type_minigun:
+	  {
+		  gdi->RedPen();
+		  gdi->RedBrush();
+		  gdi->Circle(Pos(), 2);
+		  gdi->ThickRedPen();
+		  gdi->Line(Pos(), Vector2D(Pos().x, Pos().y - 9));
+	  }
+
+	  break;
+
       case type_rocket_launcher:
         {
 

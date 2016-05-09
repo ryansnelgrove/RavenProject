@@ -277,6 +277,15 @@
     <ClCompile Include="armory\Weapon_Revolver.cpp">
       <Filter>Game\weapons &amp; projectiles\weapons</Filter>
     </ClCompile>
+    <ClCompile Include="armory\Projectile_Revolver.cpp">
+      <Filter>Game\weapons &amp; projectiles\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="armory\Weapon_Minigun.cpp">
+      <Filter>Game\weapons &amp; projectiles\weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="armory\Projectile_Minigun.cpp">
+      <Filter>Game\weapons &amp; projectiles\projectiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Raven_Bot.h">
@@ -623,6 +632,15 @@
     </ClInclude>
     <ClInclude Include="armory\Weapon_Revolver.h">
       <Filter>Game\weapons &amp; projectiles\weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="armory\Projectile_Revolver.h">
+      <Filter>Game\weapons &amp; projectiles\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="armory\Weapon_Minigun.h">
+      <Filter>Game\weapons &amp; projectiles\weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="armory\Projectile_Minigun.h">
+      <Filter>Game\weapons &amp; projectiles\projectiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

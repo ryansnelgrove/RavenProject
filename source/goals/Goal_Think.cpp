@@ -34,6 +34,8 @@ Goal_Think::Goal_Think(Raven_Bot* pBot):Goal_Composite<Raven_Bot>(pBot, goal_thi
   double ExploreBias = RandInRange(LowRangeOfBias, HighRangeOfBias);
   double AttackBias = RandInRange(LowRangeOfBias, HighRangeOfBias);
   double SmgBias = RandInRange(LowRangeOfBias, HighRangeOfBias);
+  double RevolverBias = RandInRange(LowRangeOfBias, HighRangeOfBias);
+  double MinigunBias = RandInRange(LowRangeOfBias, HighRangeOfBias);
 
   //create the evaluator objects
   m_Evaluators.push_back(new GetHealthGoal_Evaluator(HealthBias));
@@ -47,6 +49,10 @@ Goal_Think::Goal_Think(Raven_Bot* pBot):Goal_Composite<Raven_Bot>(pBot, goal_thi
                                                      type_rocket_launcher));
   m_Evaluators.push_back(new GetWeaponGoal_Evaluator(SmgBias,
 													 type_smg));
+  m_Evaluators.push_back(new GetWeaponGoal_Evaluator(RevolverBias,
+													 type_revolver));
+  m_Evaluators.push_back(new GetWeaponGoal_Evaluator(MinigunBias,
+													 type_minigun));
 }
 
 //----------------------------- dtor ------------------------------------------

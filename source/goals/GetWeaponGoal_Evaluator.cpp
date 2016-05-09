@@ -72,6 +72,10 @@ void GetWeaponGoal_Evaluator::RenderInfo(Vector2D Position, Raven_Bot* pBot)
     s="SG: "; break;
   case type_smg:
 	s = "MG"; break;
+  case type_revolver:
+	s = "PI"; break;
+  case type_minigun:
+	s = "MI"; break;
   }
 
   

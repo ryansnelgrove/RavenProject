@@ -34,6 +34,14 @@ int ItemTypeToGoalType(int gt)
 
 	return goal_get_smg;
 
+  case type_revolver:
+
+	return goal_get_revolver;
+
+  case type_minigun:
+
+	return goal_get_minigun;
+
   default: throw std::runtime_error("Goal_GetItem cannot determine item type");
 
   }//end switch

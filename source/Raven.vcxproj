@@ -213,7 +213,10 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="armory\Projectile_Minigun.cpp" />
+    <ClCompile Include="armory\Projectile_Revolver.cpp" />
     <ClCompile Include="armory\Projectile_SMG.cpp" />
+    <ClCompile Include="armory\Weapon_Minigun.cpp" />
     <ClCompile Include="armory\Weapon_Revolver.cpp" />
     <ClCompile Include="armory\Weapon_SMG.cpp" />
     <ClCompile Include="main.cpp">
@@ -533,7 +536,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="armory\Projectile_Minigun.h" />
+    <ClInclude Include="armory\Projectile_Revolver.h" />
     <ClInclude Include="armory\Projectile_SMG.h" />
+    <ClInclude Include="armory\Weapon_Minigun.h" />
     <ClInclude Include="armory\Weapon_Revolver.h" />
     <ClInclude Include="armory\Weapon_SMG.h" />
     <ClInclude Include="Raven_Bot.h" />

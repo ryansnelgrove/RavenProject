@@ -24,7 +24,9 @@ enum
   goal_strafe,
   goal_adjust_range,
   goal_say_phrase,
-  goal_get_smg
+  goal_get_smg,
+  goal_get_revolver,
+  goal_get_minigun
   
 };
 

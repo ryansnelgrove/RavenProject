@@ -59,6 +59,14 @@ std::string GoalTypeToString::Convert(int gt)
 
 	return "get_smg";
 
+  case goal_get_revolver:
+
+	  return "get_revolver";
+
+  case goal_get_minigun:
+	  
+	  return "get_minigun";
+
   case goal_wander:
 
     return "wander";

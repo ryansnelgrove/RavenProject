@@ -126,6 +126,12 @@ Blaster_MaxRoundsCarried = 0 --as above
 Blaster_IdealRange		   = 50
 Blaster_SoundRange	     = 100
 
+Belt_MaxSpeed    = 20
+Belt_Mass        = 0.1
+Belt_MaxForce    = 100.0
+Belt_Scale	 = Bot_Scale
+Belt_Damage	 = 1
+
 Bolt_MaxSpeed    = 5
 Bolt_Mass        = 1
 Bolt_MaxForce    = 100.0
@@ -137,6 +143,25 @@ Bullet_Mass      = 0.5
 Bullet_MaxForce  = 100.0
 Bullet_Scale     = Bot_Scale
 Bullet_Damage    = 2
+
+Minigun_FiringFreq	= 10
+Minigun_DefaultRounds   = 50
+Minigun_MaxRoundsCarried = 50
+Minigun_IdealRange	= 100
+Minigun_SoundRange	= 400
+Minigun_Spread		= 0.25
+
+RevBullet_MaxSpeed = 10
+RevBullet_Mass	   = 1
+RevBullet_MaxForce = 100
+RevBullet_Scale	   = Bot_Scale
+RevBullet_Damage   = 2
+
+Revolver_FiringFreq	= 1
+Revolver_DefaultRounds  = 6
+Revolver_MaxRoundsCarried = 12
+Revolver_IdealRange	= 75
+Revolver_SoundRange	= 50
 
 RocketLauncher_FiringFreq       = 1.5
 RocketLauncher_DefaultRounds      = 15

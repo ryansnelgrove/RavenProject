@@ -23,6 +23,8 @@
 #include "armory/Projectile_Slug.h"
 #include "armory/Projectile_Bolt.h"
 #include "armory/Projectile_SMG.h"
+#include "armory/Projectile_Minigun.h"
+#include "armory/Projectile_Revolver.h"
 
 #include "goals/Goal_Think.h"
 #include "goals/Raven_Goal_Types.h"
@@ -357,6 +359,28 @@ void Raven_Game::AddBullet(Raven_Bot* shooter, Vector2D target)
 #endif
 }
 
+void Raven_Game::AddRevBullet(Raven_Bot* shooter, Vector2D target)
+{
+	Raven_Projectile* rp = new RevBullet(shooter, target);
+
+	m_Projectiles.push_back(rp);
+
+	#ifdef LOG_CREATIONAL_STUFF
+	debug_con << "Adding a revolver bullet" << rp->ID() << " at pos " << rp->Pos() << "";
+#endif
+}
+
+void Raven_Game::AddBelt(Raven_Bot* shooter, Vector2D target)
+{
+	Raven_Projectile* rp = new Belt(shooter, target);
+
+	m_Projectiles.push_back(rp);
+
+	#ifdef LOG_CREATIONAL_STUFF
+	debug_con << "Adding a minigun bullet" << rp->ID() << " at pos " << rp->Pos() << "";
+#endif
+}
+
 //----------------------------- GetBotAtPosition ------------------------------
 //
 //  given a position on the map this method returns the bot found with its
@@ -537,6 +561,14 @@ void Raven_Game::ChangeWeaponOfPossessedBot(unsigned int weapon)const
 	case type_smg:
 	
 	  PossessedBot()->ChangeWeapon(type_smg); return;
+
+	case type_revolver:
+
+		PossessedBot()->ChangeWeapon(type_revolver); return;
+
+	case type_minigun:
+
+		PossessedBot()->ChangeWeapon(type_minigun); return;
 
     }
   }

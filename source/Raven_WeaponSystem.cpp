@@ -4,6 +4,8 @@
 #include "armory/Weapon_ShotGun.h"
 #include "armory/Weapon_Blaster.h"
 #include "armory/Weapon_SMG.h"
+#include "armory/Weapon_Revolver.h"
+#include "armory/Weapon_Minigun.h"
 #include "Raven_Bot.h"
 #include "misc/utils.h"
 #include "lua/Raven_Scriptor.h"
@@ -59,6 +61,8 @@ void Raven_WeaponSystem::Initialize()
   m_WeaponMap[type_rail_gun]        = 0;
   m_WeaponMap[type_rocket_launcher] = 0;
   m_WeaponMap[type_smg]             = 0;
+  m_WeaponMap[type_revolver]        = 0;
+  m_WeaponMap[type_minigun]         = 0;
 }
 
 //-------------------------------- SelectWeapon -------------------------------
@@ -133,6 +137,14 @@ void  Raven_WeaponSystem::AddWeapon(unsigned int weapon_type)
   case type_smg:
 
 	w = new SMG(m_pOwner); break;
+
+  case type_revolver:
+
+	  w = new Revolver(m_pOwner); break;
+
+  case type_minigun:
+
+	  w = new Minigun(m_pOwner); break;
 
   }//end switch
   
