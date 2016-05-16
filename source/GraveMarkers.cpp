@@ -57,7 +57,7 @@ void GraveMarkers::Render()
     gdi->BrownPen();
     gdi->ClosedShape(m_vecRIPVBTrans);
     gdi->TextColor(133,90,0);
-    gdi->TextAtPos(it->Position.x - 10, it->Position.y - 5, "RIP");
+    gdi->TextAtPos(it->Position.x - 10, it->Position.y - 5, "I'll be back");
   }
 }
 

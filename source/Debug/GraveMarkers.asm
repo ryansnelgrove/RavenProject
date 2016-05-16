@@ -26,7 +26,7 @@ _colors	DD	0ffH
 	DD	0ffff00H
 	DD	0c8c8c8H
 	DD	0e6e6ffH
-$SG139538 DB	'RIP', 00H
+$SG139538 DB	'I''ll be back', 00H
 CONST	ENDS
 PUBLIC	_hypot
 PUBLIC	?max@?$numeric_limits@H@std@@SAHXZ		; std::numeric_limits<int>::max
@@ -12378,7 +12378,7 @@ $LN3@Render:
 	mov	ecx, eax
 	call	?TextColor@Cgdi@@QAEXHHH@Z		; Cgdi::TextColor
 
-; 60   :     gdi->TextAtPos(it->Position.x - 10, it->Position.y - 5, "RIP");
+; 60   :     gdi->TextAtPos(it->Position.x - 10, it->Position.y - 5, "I'll be back");
 
 	push	OFFSET $SG139538
 	lea	ecx, DWORD PTR $T7[ebp]
