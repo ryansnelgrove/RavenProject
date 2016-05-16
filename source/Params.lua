@@ -11,7 +11,7 @@ NumBots   = 3
 MaxSearchCyclesPerUpdateStep = 1000
 
 --the name of the default map
-StartMap = "maps/Raven_DM1.map"
+StartMap = "maps/de_dust.map"
 
 --cell space partitioning defaults
 NumCellsX = 10
@@ -25,7 +25,7 @@ GraveLifetime = 5
 -------------------------------------------------------------------------------
 
 Bot_MaxHealth = 100
-Bot_MaxSpeed  = 1
+Bot_MaxSpeed  = 1.5
 Bot_Mass      = 1
 Bot_MaxForce  = 1.0
 Bot_MaxHeadTurnRate = 0.2

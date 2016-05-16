@@ -393,8 +393,7 @@ PUBLIC	?GetDesirability@Minigun@@UAENN@Z		; Minigun::GetDesirability
 PUBLIC	??1Minigun@@UAE@XZ				; Minigun::~Minigun
 PUBLIC	??_GMinigun@@UAEPAXI@Z				; Minigun::`scalar deleting destructor'
 PUBLIC	?BlackPen@Cgdi@@QAEXXZ				; Cgdi::BlackPen
-PUBLIC	?RedBrush@Cgdi@@QAEXXZ				; Cgdi::RedBrush
-PUBLIC	?ClosedShape@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z ; Cgdi::ClosedShape
+PUBLIC	?PolyLine@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z ; Cgdi::PolyLine
 PUBLIC	?GetMap@Raven_Game@@QAEQAVRaven_Map@@XZ		; Raven_Game::GetMap
 PUBLIC	??$forward@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YA$$QAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@AAV10@@Z ; std::forward<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 PUBLIC	??0?$_Iterator012@Urandom_access_iterator_tag@std@@UVector2D@@HPBU3@ABU3@U_Iterator_base12@2@@std@@QAE@XZ ; std::_Iterator012<std::random_access_iterator_tag,Vector2D,int,Vector2D const *,Vector2D const &,std::_Iterator_base12>::_Iterator012<std::random_access_iterator_tag,Vector2D,int,Vector2D const *,Vector2D const &,std::_Iterator_base12>
@@ -15004,15 +15003,15 @@ _this$ = -4						; size = 4
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu
 ; File c:\users\ryan\desktop\e-books\ai\lua project 2013\common\misc\cgdi.h
-;	COMDAT ?ClosedShape@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z
+;	COMDAT ?PolyLine@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z
 _TEXT	SEGMENT
 _p$1 = -8						; size = 4
 _this$ = -4						; size = 4
 _points$ = 8						; size = 4
-?ClosedShape@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z PROC ; Cgdi::ClosedShape, COMDAT
+?PolyLine@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z PROC ; Cgdi::PolyLine, COMDAT
 ; _this$ = ecx
 
-; 325  :   {
+; 264  :   {
 
 	push	ebp
 	mov	ebp, esp
@@ -15022,7 +15021,18 @@ _points$ = 8						; size = 4
 	mov	DWORD PTR [ebp-4], -858993460		; ccccccccH
 	mov	DWORD PTR _this$[ebp], ecx
 
-; 326  :     MoveToEx(m_hdc, (int)points[0].x, (int)points[0].y, NULL);
+; 265  :     //make sure we have at least 2 points
+; 266  :     if (points.size() < 2) return;
+
+	mov	ecx, DWORD PTR _points$[ebp]
+	call	?size@?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@QBEIXZ ; std::vector<Vector2D,std::allocator<Vector2D> >::size
+	cmp	eax, 2
+	jae	SHORT $LN4@PolyLine
+	jmp	$LN5@PolyLine
+$LN4@PolyLine:
+
+; 267  : 
+; 268  :     MoveToEx(m_hdc, (int)points[0].x, (int)points[0].y, NULL);
 
 	mov	esi, esp
 	push	0
@@ -15043,23 +15053,23 @@ _points$ = 8						; size = 4
 	cmp	esi, esp
 	call	__RTC_CheckEsp
 
-; 327  :     
-; 328  :     for (unsigned int p=1; p<points.size(); ++p)
+; 269  : 
+; 270  :     for (unsigned int p=1; p<points.size(); ++p)
 
 	mov	DWORD PTR _p$1[ebp], 1
-	jmp	SHORT $LN3@ClosedShap
-$LN2@ClosedShap:
+	jmp	SHORT $LN3@PolyLine
+$LN2@PolyLine:
 	mov	ecx, DWORD PTR _p$1[ebp]
 	add	ecx, 1
 	mov	DWORD PTR _p$1[ebp], ecx
-$LN3@ClosedShap:
+$LN3@PolyLine:
 	mov	ecx, DWORD PTR _points$[ebp]
 	call	?size@?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@QBEIXZ ; std::vector<Vector2D,std::allocator<Vector2D> >::size
 	cmp	DWORD PTR _p$1[ebp], eax
-	jae	SHORT $LN1@ClosedShap
+	jae	SHORT $LN1@PolyLine
 
-; 329  :     {
-; 330  :       LineTo(m_hdc, (int)points[p].x, (int)points[p].y);
+; 271  :     {
+; 272  :       LineTo(m_hdc, (int)points[p].x, (int)points[p].y);
 
 	mov	edx, DWORD PTR _p$1[ebp]
 	push	edx
@@ -15081,33 +15091,13 @@ $LN3@ClosedShap:
 	cmp	esi, esp
 	call	__RTC_CheckEsp
 
-; 331  :     }
+; 273  :     }
 
-	jmp	SHORT $LN2@ClosedShap
-$LN1@ClosedShap:
+	jmp	SHORT $LN2@PolyLine
+$LN1@PolyLine:
+$LN5@PolyLine:
 
-; 332  : 
-; 333  :     LineTo(m_hdc, (int)points[0].x, (int)points[0].y);
-
-	push	0
-	mov	ecx, DWORD PTR _points$[ebp]
-	call	??A?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@QBEABUVector2D@@I@Z ; std::vector<Vector2D,std::allocator<Vector2D> >::operator[]
-	cvttsd2si edx, QWORD PTR [eax+8]
-	mov	esi, esp
-	push	edx
-	push	0
-	mov	ecx, DWORD PTR _points$[ebp]
-	call	??A?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@QBEABUVector2D@@I@Z ; std::vector<Vector2D,std::allocator<Vector2D> >::operator[]
-	cvttsd2si eax, QWORD PTR [eax]
-	push	eax
-	mov	ecx, DWORD PTR _this$[ebp]
-	mov	edx, DWORD PTR [ecx+124]
-	push	edx
-	call	DWORD PTR __imp__LineTo@12
-	cmp	esi, esp
-	call	__RTC_CheckEsp
-
-; 334  :   }
+; 274  :   }
 
 	pop	esi
 	add	esp, 8
@@ -15116,46 +15106,7 @@ $LN1@ClosedShap:
 	mov	esp, ebp
 	pop	ebp
 	ret	4
-?ClosedShape@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z ENDP ; Cgdi::ClosedShape
-_TEXT	ENDS
-; Function compile flags: /Odtp /RTCsu
-; File c:\users\ryan\desktop\e-books\ai\lua project 2013\common\misc\cgdi.h
-;	COMDAT ?RedBrush@Cgdi@@QAEXXZ
-_TEXT	SEGMENT
-_this$ = -4						; size = 4
-?RedBrush@Cgdi@@QAEXXZ PROC				; Cgdi::RedBrush, COMDAT
-; _this$ = ecx
-
-; 163  :   void RedBrush()  {if(m_hdc)SelectObject(m_hdc, m_RedBrush);}
-
-	push	ebp
-	mov	ebp, esp
-	push	ecx
-	push	esi
-	mov	DWORD PTR [ebp-4], -858993460		; ccccccccH
-	mov	DWORD PTR _this$[ebp], ecx
-	mov	eax, DWORD PTR _this$[ebp]
-	cmp	DWORD PTR [eax+124], 0
-	je	SHORT $LN2@RedBrush
-	mov	esi, esp
-	mov	ecx, DWORD PTR _this$[ebp]
-	mov	edx, DWORD PTR [ecx+88]
-	push	edx
-	mov	eax, DWORD PTR _this$[ebp]
-	mov	ecx, DWORD PTR [eax+124]
-	push	ecx
-	call	DWORD PTR __imp__SelectObject@8
-	cmp	esi, esp
-	call	__RTC_CheckEsp
-$LN2@RedBrush:
-	pop	esi
-	add	esp, 4
-	cmp	ebp, esp
-	call	__RTC_CheckEsp
-	mov	esp, ebp
-	pop	ebp
-	ret	0
-?RedBrush@Cgdi@@QAEXXZ ENDP				; Cgdi::RedBrush
+?PolyLine@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z ENDP ; Cgdi::PolyLine
 _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu
 ; File c:\users\ryan\desktop\e-books\ai\lua project 2013\common\misc\cgdi.h
@@ -15552,8 +15503,8 @@ _TEXT	ENDS
 ; Function compile flags: /Odtp /RTCsu
 ; File c:\users\ryan\desktop\e-books\ai\lua project 2013\source\armory\weapon_minigun.cpp
 _TEXT	SEGMENT
-tv173 = -120						; size = 4
-tv174 = -116						; size = 4
+tv171 = -120						; size = 4
+tv172 = -116						; size = 4
 $T2 = -112						; size = 16
 $T3 = -96						; size = 16
 $T4 = -80						; size = 16
@@ -15629,11 +15580,11 @@ __$EHRec$ = -12						; size = 12
 	push	ecx
 	call	?WorldTransform@@YA?AV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@AAV12@ABUVector2D@@111@Z ; WorldTransform
 	add	esp, 24					; 00000018H
-	mov	DWORD PTR tv174[ebp], eax
-	mov	edx, DWORD PTR tv174[ebp]
-	mov	DWORD PTR tv173[ebp], edx
+	mov	DWORD PTR tv172[ebp], eax
+	mov	edx, DWORD PTR tv172[ebp]
+	mov	DWORD PTR tv171[ebp], edx
 	mov	DWORD PTR __$EHRec$[ebp+8], 0
-	mov	eax, DWORD PTR tv173[ebp]
+	mov	eax, DWORD PTR tv171[ebp]
 	push	eax
 	mov	ecx, DWORD PTR _this$[ebp]
 	add	ecx, 112				; 00000070H
@@ -15649,23 +15600,17 @@ __$EHRec$ = -12						; size = 12
 	mov	ecx, eax
 	call	?BlackPen@Cgdi@@QAEXXZ			; Cgdi::BlackPen
 
-; 89   : 	gdi->RedBrush();
-
-	call	?Instance@Cgdi@@SAPAV1@XZ		; Cgdi::Instance
-	mov	ecx, eax
-	call	?RedBrush@Cgdi@@QAEXXZ			; Cgdi::RedBrush
-
-; 90   : 
-; 91   : 	gdi->ClosedShape(m_vecWeaponVBTrans);
+; 89   : 
+; 90   : 	gdi->PolyLine(m_vecWeaponVBTrans);
 
 	mov	ecx, DWORD PTR _this$[ebp]
 	add	ecx, 112				; 00000070H
 	push	ecx
 	call	?Instance@Cgdi@@SAPAV1@XZ		; Cgdi::Instance
 	mov	ecx, eax
-	call	?ClosedShape@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z ; Cgdi::ClosedShape
+	call	?PolyLine@Cgdi@@QAEXABV?$vector@UVector2D@@V?$allocator@UVector2D@@@std@@@std@@@Z ; Cgdi::PolyLine
 
-; 92   : }
+; 91   : }
 
 	mov	ecx, DWORD PTR __$EHRec$[ebp]
 	mov	DWORD PTR fs:0, ecx

@@ -86,7 +86,6 @@ void Minigun::Render()
 		m_pOwner->Scale());
 
 	gdi->BlackPen();
-	gdi->RedBrush();
 
-	gdi->ClosedShape(m_vecWeaponVBTrans);
+	gdi->PolyLine(m_vecWeaponVBTrans);
 }
