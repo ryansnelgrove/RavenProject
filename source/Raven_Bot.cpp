@@ -23,31 +23,31 @@
 #include "Debug/DebugConsole.h"
 
 //-------------------------- ctor ---------------------------------------------
-Raven_Bot::Raven_Bot(Raven_Game* world,Vector2D pos):
+Raven_Bot::Raven_Bot(Raven_Game* world, Vector2D pos, int team) :
 
-  MovingEntity(pos,
-               script->GetDouble("Bot_Scale"),
-               Vector2D(0,0),
-               script->GetDouble("Bot_MaxSpeed"),
-               Vector2D(1,0),
-               script->GetDouble("Bot_Mass"),
-               Vector2D(script->GetDouble("Bot_Scale"),script->GetDouble("Bot_Scale")),
-               script->GetDouble("Bot_MaxHeadTurnRate"),
-               script->GetDouble("Bot_MaxForce")),
-			   
-                 
-                 m_iMaxHealth(script->GetInt("Bot_MaxHealth")),
-                 m_iHealth(script->GetInt("Bot_MaxHealth")),
-                 m_pPathPlanner(NULL),
-                 m_pSteering(NULL),
-                 m_pWorld(world),
-                 m_pBrain(NULL),
-                 m_iNumUpdatesHitPersistant((int)(FrameRate * script->GetDouble("HitFlashTime"))),
-                 m_bHit(false),
-                 m_iScore(0),
-                 m_Status(spawning),
-                 m_bPossessed(false),
-                 m_dFieldOfView(DegsToRads(script->GetDouble("Bot_FOV")))
+MovingEntity(pos,
+script->GetDouble("Bot_Scale"),
+Vector2D(0, 0),
+script->GetDouble("Bot_MaxSpeed"),
+Vector2D(1, 0),
+script->GetDouble("Bot_Mass"),
+Vector2D(script->GetDouble("Bot_Scale"), script->GetDouble("Bot_Scale")),
+script->GetDouble("Bot_MaxHeadTurnRate"),
+script->GetDouble("Bot_MaxForce")),
+
+m_iMaxHealth(script->GetInt("Bot_MaxHealth")),
+m_iHealth(script->GetInt("Bot_MaxHealth")),
+m_pPathPlanner(NULL),
+m_pSteering(NULL),
+m_pWorld(world),
+m_pBrain(NULL),
+m_iNumUpdatesHitPersistant((int)(FrameRate * script->GetDouble("HitFlashTime"))),
+m_bHit(false),
+m_iScore(0),
+m_Status(spawning),
+m_bPossessed(false),
+m_dFieldOfView(DegsToRads(script->GetDouble("Bot_FOV")))
+
            
 {
   SetEntityType(type_bot);
@@ -57,6 +57,7 @@ Raven_Bot::Raven_Bot(Raven_Game* world,Vector2D pos):
   //a bot starts off facing in the direction it is heading
   m_vFacing = m_vHeading;
 
+  this->m_pTeam = team;
   //create the navigation module
   m_pPathPlanner = new Raven_PathPlanner(this);
 
@@ -116,7 +117,6 @@ void Raven_Bot::Spawn(Vector2D pos)
     m_pWeaponSys->Initialize();
     RestoreHealthToMaximum();
 }
-
 //-------------------------------- Update -------------------------------------
 //
 void Raven_Bot::Update()
@@ -487,7 +487,15 @@ void Raven_Bot::Render()
 
   if (isDead() || isSpawning()) return;
   
-  gdi->BluePen();
+  if (selectedTeam() == 0)
+  {
+	  gdi->BluePen();
+  }
+  else
+  {
+	  gdi->RedPen();
+  }
+  //gdi->BluePen();
   
   m_vecBotVBTrans = WorldTransform(m_vecBotVB,
                                    Pos(),
@@ -497,8 +505,24 @@ void Raven_Bot::Render()
 
   gdi->ClosedShape(m_vecBotVBTrans);
   
+  if (selectedTeam() == 0)
+  {
+	  gdi->BluePen();
+  }
+  else
+  {
+	  gdi->RedPen();
+  }
+
   //draw the head
-  gdi->BrownBrush();
+  if (selectedTeam() == 0)
+  {
+	  gdi->BlueBrush();
+  }
+  else
+  {
+	  gdi->RedBrush();
+  }
   gdi->Circle(Pos(), 6.0 * Scale().x);
 
 

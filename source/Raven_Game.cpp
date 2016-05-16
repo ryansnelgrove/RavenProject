@@ -22,9 +22,9 @@
 #include "armory/Projectile_Pellet.h"
 #include "armory/Projectile_Slug.h"
 #include "armory/Projectile_Bolt.h"
-#include "armory/Projectile_SMG.h"
 #include "armory/Projectile_Minigun.h"
 #include "armory/Projectile_Revolver.h"
+#include "armory/Projectile_SMG.h"
 
 #include "goals/Goal_Think.h"
 #include "goals/Raven_Goal_Types.h"
@@ -251,9 +251,11 @@ void Raven_Game::AddBots(unsigned int NumBotsToAdd)
 { 
   while (NumBotsToAdd--)
   {
+	  totalBotsMade++;
+	  selectedTeam = NumBotsToAdd % 2;
     //create a bot. (its position is irrelevant at this point because it will
     //not be rendered until it is spawned)
-    Raven_Bot* rb = new Raven_Bot(this, Vector2D());
+    Raven_Bot* rb = new Raven_Bot(this, Vector2D(), selectedTeam);
 
     //switch the default steering behaviors on
     rb->GetSteering()->WallAvoidanceOn();
@@ -269,6 +271,35 @@ void Raven_Game::AddBots(unsigned int NumBotsToAdd)
   debug_con << "Adding bot with ID " << ttos(rb->ID()) << "";
 #endif
   }
+}
+//-------------------------- MenuItemAddBots --------------------------------------
+//
+//  Adds a bot and switches on the default steering behavior
+//-----------------------------------------------------------------------------
+void Raven_Game::ExtraBots(unsigned int numBotsToAdd)
+{
+	while (numBotsToAdd--)
+	{
+		totalBotsMade++;
+		selectedTeam = totalBotsMade % 2;
+		//create a bot. (its position is irrelevant at this point because it will
+		//not be rendered until it is spawned)
+		Raven_Bot* rb = new Raven_Bot(this, Vector2D(), selectedTeam);
+
+		//switch the default steering behaviors on
+		rb->GetSteering()->WallAvoidanceOn();
+		rb->GetSteering()->SeparationOn();
+
+		m_Bots.push_back(rb);
+
+		//register the bot with the entity manager
+		EntityMgr->RegisterEntity(rb);
+
+
+#ifdef LOG_CREATIONAL_STUFF
+		debug_con << "Adding bot with ID " << ttos(rb->ID()) << "";
+#endif
+	}
 }
 
 //---------------------------- NotifyAllBotsOfRemoval -------------------------
@@ -354,8 +385,8 @@ void Raven_Game::AddBullet(Raven_Bot* shooter, Vector2D target)
 
 	m_Projectiles.push_back(rp);
 
-	#ifdef LOG_CREATIONAL_STUFF
-	debug_con << "Adding a smg bullet " << rp->ID() << " at pos " << rp->Pos() << "";
+#ifdef LOG_CREATIONAL_STUFF
+	debug_con << "Adding a smg bullet" << rp->ID() << " at pos " << rp->Pos() << "";
 #endif
 }
 
@@ -365,7 +396,7 @@ void Raven_Game::AddRevBullet(Raven_Bot* shooter, Vector2D target)
 
 	m_Projectiles.push_back(rp);
 
-	#ifdef LOG_CREATIONAL_STUFF
+#ifdef LOG_CREATIONAL_STUFF
 	debug_con << "Adding a revolver bullet" << rp->ID() << " at pos " << rp->Pos() << "";
 #endif
 }
@@ -376,7 +407,7 @@ void Raven_Game::AddBelt(Raven_Bot* shooter, Vector2D target)
 
 	m_Projectiles.push_back(rp);
 
-	#ifdef LOG_CREATIONAL_STUFF
+#ifdef LOG_CREATIONAL_STUFF
 	debug_con << "Adding a minigun bullet" << rp->ID() << " at pos " << rp->Pos() << "";
 #endif
 }
@@ -559,16 +590,16 @@ void Raven_Game::ChangeWeaponOfPossessedBot(unsigned int weapon)const
       PossessedBot()->ChangeWeapon(type_rail_gun); return;
 
 	case type_smg:
-	
+
 	  PossessedBot()->ChangeWeapon(type_smg); return;
 
 	case type_revolver:
 
-		PossessedBot()->ChangeWeapon(type_revolver); return;
+	  PossessedBot()->ChangeWeapon(type_revolver); return;
 
 	case type_minigun:
 
-		PossessedBot()->ChangeWeapon(type_minigun); return;
+	  PossessedBot()->ChangeWeapon(type_minigun); return;
 
     }
   }

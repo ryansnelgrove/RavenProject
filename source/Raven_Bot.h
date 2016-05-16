@@ -46,6 +46,9 @@ private:
   //a pointer to the world data
   Raven_Game*                        m_pWorld;
 
+  //Pointer to team		
+  int m_pTeam;
+
   //this object handles the arbitration and processing of high level goals
   Goal_Think*                        m_pBrain;
 
@@ -125,7 +128,7 @@ private:
 
 public:
   
-  Raven_Bot(Raven_Game* world, Vector2D pos);
+  Raven_Bot(Raven_Game* world, Vector2D pos, int team);
   virtual ~Raven_Bot();
 
   //the usual suspects
@@ -145,7 +148,7 @@ public:
   void          ReduceHealth(unsigned int val);
   void          IncreaseHealth(unsigned int val);
   void          RestoreHealthToMaximum();
-
+  int			selectedTeam() const { return m_pTeam; }
   int           Score()const{return m_iScore;}
   void          IncrementScore(){++m_iScore;}
 

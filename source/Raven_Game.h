@@ -38,6 +38,8 @@ class Raven_Game
 {
 private:
 
+  //Get the number of bots actually made so we can make teams much better balanced
+	int								totalBotsMade;
   //the current game map
   Raven_Map*                       m_pMap;
  
@@ -55,6 +57,8 @@ private:
   //this class manages all the path planning requests
   PathManager<Raven_PathPlanner>*  m_pPathManager;
 
+  //Peck - use ints to determine teams
+  int								selectedTeam;
 
   //if true the game will be paused
   bool                             m_bPaused;
@@ -94,6 +98,7 @@ public:
   bool LoadMap(const std::string& FileName); 
 
   void AddBots(unsigned int NumBotsToAdd);
+  void ExtraBots(unsigned int numOfBotsToAdd);
   void AddRocket(Raven_Bot* shooter, Vector2D target);
   void AddRailGunSlug(Raven_Bot* shooter, Vector2D target);
   void AddShotGunPellet(Raven_Bot* shooter, Vector2D target);

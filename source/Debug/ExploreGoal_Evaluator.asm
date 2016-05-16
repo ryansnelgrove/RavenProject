@@ -10,9 +10,9 @@ INCLUDELIB LIBCMTD
 INCLUDELIB OLDNAMES
 
 CONST	SEGMENT
-$SG156702 DB	'EX: ', 00H
-	ORG $+3
 _Pi	DQ	0400921f9f01b866er		; 3.14159
+$SG156707 DB	'EX: ', 00H
+	ORG $+3
 _colors	DD	0ffH
 	DD	0ff0000H
 	DD	0ff00H
@@ -13062,7 +13062,7 @@ _pBot$ = 24						; size = 4
 	mov	DWORD PTR __$EHRec$[ebp+8], 0
 	mov	ecx, DWORD PTR tv90[ebp]
 	push	ecx
-	push	OFFSET $SG156702
+	push	OFFSET $SG156707
 	lea	edx, DWORD PTR $T3[ebp]
 	push	edx
 	call	??$?HDU?$char_traits@D@std@@V?$allocator@D@1@@std@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@PBD$$QAV10@@Z ; std::operator+<char,std::char_traits<char>,std::allocator<char> >
@@ -13215,7 +13215,7 @@ _this$ = -4						; size = 4
 ?GetBrain@Raven_Bot@@QAEQAVGoal_Think@@XZ PROC		; Raven_Bot::GetBrain, COMDAT
 ; _this$ = ecx
 
-; 206  :   Goal_Think* const                  GetBrain(){return m_pBrain;}
+; 209  :   Goal_Think* const                  GetBrain(){return m_pBrain;}
 
 	push	ebp
 	mov	ebp, esp
@@ -13223,7 +13223,7 @@ _this$ = -4						; size = 4
 	mov	DWORD PTR [ebp-4], -858993460		; ccccccccH
 	mov	DWORD PTR _this$[ebp], ecx
 	mov	eax, DWORD PTR _this$[ebp]
-	mov	eax, DWORD PTR [eax+152]
+	mov	eax, DWORD PTR [eax+156]
 	mov	esp, ebp
 	pop	ebp
 	ret	0

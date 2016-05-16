@@ -12,9 +12,9 @@ INCLUDELIB OLDNAMES
 CONST	SEGMENT
 _Pi	DQ	0400921f9f01b866er		; 3.14159
 _pi	DQ	0400921f9f01b866er		; 3.14159
-$SG146109 DB	'AT: ', 00H
+$SG146114 DB	'AT: ', 00H
 	ORG $+3
-$SG146207 DB	', ', 00H
+$SG146212 DB	', ', 00H
 	ORG $+1
 _colors	DD	0ffH
 	DD	0ff0000H
@@ -13223,7 +13223,7 @@ _pBot$ = 24						; size = 4
 	mov	DWORD PTR __$EHRec$[ebp+8], 0
 	mov	ecx, DWORD PTR tv161[ebp]
 	push	ecx
-	push	OFFSET $SG146109
+	push	OFFSET $SG146114
 	lea	edx, DWORD PTR $T10[ebp]
 	push	edx
 	call	??$?HDU?$char_traits@D@std@@V?$allocator@D@1@@std@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@PBD$$QAV10@@Z ; std::operator+<char,std::char_traits<char>,std::allocator<char> >
@@ -13284,7 +13284,7 @@ _pBot$ = 24						; size = 4
 	mov	DWORD PTR __$EHRec$[ebp+8], 2
 	mov	ecx, DWORD PTR tv165[ebp]
 	push	ecx
-	push	OFFSET $SG146207
+	push	OFFSET $SG146212
 	push	2
 	lea	edx, DWORD PTR $T4[ebp]
 	push	edx
@@ -13565,7 +13565,7 @@ _this$ = -4						; size = 4
 ?GetTargetSys@Raven_Bot@@QAEQAVRaven_TargetingSystem@@XZ PROC ; Raven_Bot::GetTargetSys, COMDAT
 ; _this$ = ecx
 
-; 208  :   Raven_TargetingSystem* const       GetTargetSys(){return m_pTargSys;}
+; 211  :   Raven_TargetingSystem* const       GetTargetSys(){return m_pTargSys;}
 
 	push	ebp
 	mov	ebp, esp
@@ -13573,7 +13573,7 @@ _this$ = -4						; size = 4
 	mov	DWORD PTR [ebp-4], -858993460		; ccccccccH
 	mov	DWORD PTR _this$[ebp], ecx
 	mov	eax, DWORD PTR _this$[ebp]
-	mov	eax, DWORD PTR [eax+168]
+	mov	eax, DWORD PTR [eax+172]
 	mov	esp, ebp
 	pop	ebp
 	ret	0
@@ -13587,7 +13587,7 @@ _this$ = -4						; size = 4
 ?GetBrain@Raven_Bot@@QAEQAVGoal_Think@@XZ PROC		; Raven_Bot::GetBrain, COMDAT
 ; _this$ = ecx
 
-; 206  :   Goal_Think* const                  GetBrain(){return m_pBrain;}
+; 209  :   Goal_Think* const                  GetBrain(){return m_pBrain;}
 
 	push	ebp
 	mov	ebp, esp
@@ -13595,7 +13595,7 @@ _this$ = -4						; size = 4
 	mov	DWORD PTR [ebp-4], -858993460		; ccccccccH
 	mov	DWORD PTR _this$[ebp], ecx
 	mov	eax, DWORD PTR _this$[ebp]
-	mov	eax, DWORD PTR [eax+152]
+	mov	eax, DWORD PTR [eax+156]
 	mov	esp, ebp
 	pop	ebp
 	ret	0

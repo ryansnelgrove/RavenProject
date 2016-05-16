@@ -60,9 +60,9 @@ void Raven_WeaponSystem::Initialize()
   m_WeaponMap[type_shotgun]         = 0;
   m_WeaponMap[type_rail_gun]        = 0;
   m_WeaponMap[type_rocket_launcher] = 0;
-  m_WeaponMap[type_smg]             = 0;
-  m_WeaponMap[type_revolver]        = 0;
-  m_WeaponMap[type_minigun]         = 0;
+  m_WeaponMap[type_smg]				= 0;
+  m_WeaponMap[type_revolver]		= 0;
+  m_WeaponMap[type_minigun]			= 0;
 }
 
 //-------------------------------- SelectWeapon -------------------------------
@@ -140,11 +140,11 @@ void  Raven_WeaponSystem::AddWeapon(unsigned int weapon_type)
 
   case type_revolver:
 
-	  w = new Revolver(m_pOwner); break;
+	w = new Revolver(m_pOwner); break;
 
   case type_minigun:
 
-	  w = new Minigun(m_pOwner); break;
+	w = new Minigun(m_pOwner); break;
 
   }//end switch
   
@@ -197,50 +197,54 @@ void Raven_WeaponSystem::TakeAimAndShoot()const
   //very recently gone out of view (this latter condition is to ensure the 
   //weapon is aimed at the target even if it temporarily dodges behind a wall
   //or other cover)
+
   if (m_pOwner->GetTargetSys()->isTargetShootable() ||
       (m_pOwner->GetTargetSys()->GetTimeTargetHasBeenOutOfView() < 
        m_dAimPersistance) )
   {
-    //the position the weapon will be aimed at
-    Vector2D AimingPos = m_pOwner->GetTargetBot()->Pos();
-    
-    //if the current weapon is not an instant hit type gun the target position
-    //must be adjusted to take into account the predicted movement of the 
-    //target
-    if (GetCurrentWeapon()->GetType() == type_rocket_launcher ||
-        GetCurrentWeapon()->GetType() == type_blaster)
-    {
-      AimingPos = PredictFuturePositionOfTarget();
+	  if (m_pOwner->selectedTeam() != m_pOwner->GetTargetBot()->selectedTeam())
+	  {
 
-      //if the weapon is aimed correctly, there is line of sight between the
-      //bot and the aiming position and it has been in view for a period longer
-      //than the bot's reaction time, shoot the weapon
-      if ( m_pOwner->RotateFacingTowardPosition(AimingPos) &&
-           (m_pOwner->GetTargetSys()->GetTimeTargetHasBeenVisible() >
-            m_dReactionTime) &&
-           m_pOwner->hasLOSto(AimingPos) )
-      {
-        AddNoiseToAim(AimingPos);
+		  //the position the weapon will be aimed at
+		  Vector2D AimingPos = m_pOwner->GetTargetBot()->Pos();
 
-        GetCurrentWeapon()->ShootAt(AimingPos);
-      }
-    }
+		  //if the current weapon is not an instant hit type gun the target position
+		  //must be adjusted to take into account the predicted movement of the 
+		  //target
+		  if (GetCurrentWeapon()->GetType() == type_rocket_launcher ||
+			  GetCurrentWeapon()->GetType() == type_blaster)
+		  {
+			  AimingPos = PredictFuturePositionOfTarget();
 
-    //no need to predict movement, aim directly at target
-    else
-    {
-      //if the weapon is aimed correctly and it has been in view for a period
-      //longer than the bot's reaction time, shoot the weapon
-      if ( m_pOwner->RotateFacingTowardPosition(AimingPos) &&
-           (m_pOwner->GetTargetSys()->GetTimeTargetHasBeenVisible() >
-            m_dReactionTime) )
-      {
-        AddNoiseToAim(AimingPos);
-        
-        GetCurrentWeapon()->ShootAt(AimingPos);
-      }
-    }
+			  //if the weapon is aimed correctly, there is line of sight between the
+			  //bot and the aiming position and it has been in view for a period longer
+			  //than the bot's reaction time, shoot the weapon
+			  if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
+				  (m_pOwner->GetTargetSys()->GetTimeTargetHasBeenVisible() >
+				  m_dReactionTime) &&
+				  m_pOwner->hasLOSto(AimingPos))
+			  {
+				  AddNoiseToAim(AimingPos);
 
+				  GetCurrentWeapon()->ShootAt(AimingPos);
+			  }
+		  }
+
+		  //no need to predict movement, aim directly at target
+		  else
+		  {
+			  //if the weapon is aimed correctly and it has been in view for a period
+			  //longer than the bot's reaction time, shoot the weapon
+			  if (m_pOwner->RotateFacingTowardPosition(AimingPos) &&
+				  (m_pOwner->GetTargetSys()->GetTimeTargetHasBeenVisible() >
+				  m_dReactionTime))
+			  {
+				  AddNoiseToAim(AimingPos);
+
+				  GetCurrentWeapon()->ShootAt(AimingPos);
+			  }
+		  }
+	  }
   }
   
   //no target to shoot at so rotate facing to be parallel with the bot's

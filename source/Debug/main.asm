@@ -16,22 +16,22 @@ _BSS	SEGMENT
 ?g_pRaven@@3PAVRaven_Game@@A DD 01H DUP (?)		; g_pRaven
 _BSS	ENDS
 _DATA	SEGMENT
-?g_szApplicationName@@3PADA DD FLAT:$SG152510		; g_szApplicationName
-?g_szWindowClassName@@3PADA DD FLAT:$SG152512		; g_szWindowClassName
+?g_szApplicationName@@3PADA DD FLAT:$SG152519		; g_szApplicationName
+?g_szWindowClassName@@3PADA DD FLAT:$SG152521		; g_szWindowClassName
 _DATA	ENDS
 CONST	SEGMENT
-$SG152576 DB	'map', 00H
-$SG152577 DB	'Raven map file (*.map)', 00H
-$SG152588 DB	00H
-$SG152587 DB	'Filename: ', 00H
+$SG152585 DB	'map', 00H
+$SG152586 DB	'Raven map file (*.map)', 00H
+$SG152597 DB	00H
+$SG152596 DB	'Filename: ', 00H
 	ORG $+1
-$SG152640 DB	'Error', 00H
+$SG152649 DB	'Error', 00H
 	ORG $+2
-$SG152641 DB	'Registration Failed!', 00H
+$SG152650 DB	'Registration Failed!', 00H
 	ORG $+3
-$SG152644 DB	'Error!', 00H
+$SG152653 DB	'Error!', 00H
 	ORG $+1
-$SG152645 DB	'CreateWindowEx Failed!', 00H
+$SG152654 DB	'CreateWindowEx Failed!', 00H
 	ORG $+1
 _Pi	DQ	0400921f9f01b866er		; 3.14159
 _pi	DQ	0400921f9f01b866er		; 3.14159
@@ -50,9 +50,9 @@ _colors	DD	0ffH
 	DD	0ffff00H
 	DD	0c8c8c8H
 	DD	0e6e6ffH
-$SG152510 DB	'Raven', 00H
+$SG152519 DB	'Raven', 00H
 	ORG $+2
-$SG152512 DB	'MyWindowClass', 00H
+$SG152521 DB	'MyWindowClass', 00H
 CONST	ENDS
 PUBLIC	_WinMain@16
 PUBLIC	_hypot
@@ -735,6 +735,7 @@ EXTRN	?Render@Raven_Game@@QAEXXZ:PROC			; Raven_Game::Render
 EXTRN	?Update@Raven_Game@@QAEXXZ:PROC			; Raven_Game::Update
 EXTRN	?LoadMap@Raven_Game@@QAE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z:PROC ; Raven_Game::LoadMap
 EXTRN	?AddBots@Raven_Game@@QAEXI@Z:PROC		; Raven_Game::AddBots
+EXTRN	?ExtraBots@Raven_Game@@QAEXI@Z:PROC		; Raven_Game::ExtraBots
 EXTRN	?RemoveBot@Raven_Game@@QAEXXZ:PROC		; Raven_Game::RemoveBot
 EXTRN	?ClickRightMouseButton@Raven_Game@@QAEXUtagPOINTS@@@Z:PROC ; Raven_Game::ClickRightMouseButton
 EXTRN	?ClickLeftMouseButton@Raven_Game@@QAEXUtagPOINTS@@@Z:PROC ; Raven_Game::ClickLeftMouseButton
@@ -9695,7 +9696,7 @@ $LN41@WindowProc:
 ; 97   :          //create the game
 ; 98   :          g_pRaven = new Raven_Game();
 
-	push	44					; 0000002cH
+	push	52					; 00000034H
 	call	??2@YAPAXI@Z				; operator new
 	add	esp, 4
 	mov	DWORD PTR $T2[ebp], eax
@@ -9991,7 +9992,7 @@ $LN31@WindowProc:
 	mov	ecx, DWORD PTR ?g_pRaven@@3PAVRaven_Game@@A ; g_pRaven
 	call	?ChangeWeaponOfPossessedBot@Raven_Game@@QBEXI@Z ; Raven_Game::ChangeWeaponOfPossessedBot
 
-; 162  : 
+; 162  : 			 
 ; 163  : 		   break;
 
 	jmp	SHORT $LN38@WindowProc
@@ -10045,11 +10046,11 @@ $LN27@WindowProc:
 ; 183  : 
 ; 184  :          case VK_UP:
 ; 185  : 
-; 186  :            g_pRaven->AddBots(1); break;
+; 186  :            g_pRaven->ExtraBots(1); break;
 
 	push	1
 	mov	ecx, DWORD PTR ?g_pRaven@@3PAVRaven_Game@@A ; g_pRaven
-	call	?AddBots@Raven_Game@@QAEXI@Z		; Raven_Game::AddBots
+	call	?ExtraBots@Raven_Game@@QAEXI@Z		; Raven_Game::ExtraBots
 	jmp	SHORT $LN38@WindowProc
 $LN26@WindowProc:
 
@@ -10131,11 +10132,11 @@ $LN20@WindowProc:
 ; 221  :           
 ; 222  :           FileOpenDlg(hwnd, szFileName, szTitleName, "Raven map file (*.map)", "map");
 
-	push	OFFSET $SG152576
+	push	OFFSET $SG152585
 	lea	ecx, DWORD PTR $T8[ebp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@PBD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
 	mov	DWORD PTR __$EHRec$[ebp+8], 1
-	push	OFFSET $SG152577
+	push	OFFSET $SG152586
 	lea	ecx, DWORD PTR $T7[ebp]
 	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@PBD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
 	mov	BYTE PTR __$EHRec$[ebp+8], 2
@@ -10159,9 +10160,9 @@ $LN20@WindowProc:
 ; 223  : 
 ; 224  :           debug_con << "Filename: " << szTitleName << "";
 
-	push	OFFSET $SG152588
+	push	OFFSET $SG152597
 	push	OFFSET ?szTitleName@?1??WindowProc@@YGJPAUHWND__@@IIJ@Z@4PADA
-	push	OFFSET $SG152587
+	push	OFFSET $SG152596
 	call	?Instance@DebugConsole@@SAPAV1@XZ	; DebugConsole::Instance
 	mov	ecx, eax
 	call	??$?6$$BY0L@$$CBD@DebugConsole@@QAEAAV0@AAY0L@$$CBD@Z ; DebugConsole::operator<<<char const [11]>
@@ -11252,7 +11253,7 @@ _this$ = -4						; size = 4
 ?TogglePause@Raven_Game@@QAEXXZ PROC			; Raven_Game::TogglePause, COMDAT
 ; _this$ = ecx
 
-; 138  :   void        TogglePause(){m_bPaused = !m_bPaused;}
+; 143  :   void        TogglePause(){m_bPaused = !m_bPaused;}
 
 	push	ebp
 	mov	ebp, esp
@@ -11261,7 +11262,7 @@ _this$ = -4						; size = 4
 	mov	DWORD PTR [ebp-4], -858993460		; ccccccccH
 	mov	DWORD PTR _this$[ebp], ecx
 	mov	eax, DWORD PTR _this$[ebp]
-	movzx	ecx, BYTE PTR [eax+36]
+	movzx	ecx, BYTE PTR [eax+44]
 	test	ecx, ecx
 	jne	SHORT $LN3@TogglePaus
 	mov	DWORD PTR tv68[ebp], 1
@@ -11271,7 +11272,7 @@ $LN3@TogglePaus:
 $LN4@TogglePaus:
 	mov	edx, DWORD PTR _this$[ebp]
 	mov	al, BYTE PTR tv68[ebp]
-	mov	BYTE PTR [edx+36], al
+	mov	BYTE PTR [edx+44], al
 	mov	esp, ebp
 	pop	ebp
 	ret	0
@@ -26884,8 +26885,8 @@ _WinMain@16 PROC
 
 	mov	esi, esp
 	push	0
-	push	OFFSET $SG152640
-	push	OFFSET $SG152641
+	push	OFFSET $SG152649
+	push	OFFSET $SG152650
 	push	0
 	call	DWORD PTR __imp__MessageBoxA@16
 	cmp	esi, esp
@@ -26972,8 +26973,8 @@ $LN10@WinMain:
 
 	mov	esi, esp
 	push	0
-	push	OFFSET $SG152644
-	push	OFFSET $SG152645
+	push	OFFSET $SG152653
+	push	OFFSET $SG152654
 	push	0
 	call	DWORD PTR __imp__MessageBoxA@16
 	cmp	esi, esp

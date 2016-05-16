@@ -10,14 +10,14 @@ INCLUDELIB LIBCMTD
 INCLUDELIB OLDNAMES
 
 CONST	SEGMENT
-$SG144551 DB	'<Goal_Think::Arbitrate>: no evaluator selected', 00H
+$SG144556 DB	'<Goal_Think::Arbitrate>: no evaluator selected', 00H
 	ORG $+1
-$SG144552 DB	'g', 00H, 'o', 00H, 'a', 00H, 'l', 00H, 's', 00H, '\', 00H
+$SG144557 DB	'g', 00H, 'o', 00H, 'a', 00H, 'l', 00H, 's', 00H, '\', 00H
 	DB	'G', 00H, 'o', 00H, 'a', 00H, 'l', 00H, '_', 00H, 'T', 00H, 'h'
 	DB	00H, 'i', 00H, 'n', 00H, 'k', 00H, '.', 00H, 'c', 00H, 'p', 00H
 	DB	'p', 00H, 00H, 00H
 	ORG $+6
-$SG144553 DB	'M', 00H, 'o', 00H, 's', 00H, 't', 00H, 'D', 00H, 'e', 00H
+$SG144558 DB	'M', 00H, 'o', 00H, 's', 00H, 't', 00H, 'D', 00H, 'e', 00H
 	DB	's', 00H, 'i', 00H, 'r', 00H, 'a', 00H, 'b', 00H, 'l', 00H, 'e'
 	DB	00H, ' ', 00H, '&', 00H, '&', 00H, ' ', 00H, '"', 00H, '<', 00H
 	DB	'G', 00H, 'o', 00H, 'a', 00H, 'l', 00H, '_', 00H, 'T', 00H, 'h'
@@ -11084,13 +11084,13 @@ $LN2@Arbitrate:
 
 	cmp	DWORD PTR _MostDesirable$[ebp], 0
 	je	SHORT $LN7@Arbitrate
-	mov	ecx, OFFSET $SG144551
+	mov	ecx, OFFSET $SG144556
 	test	ecx, ecx
 	jne	SHORT $LN8@Arbitrate
 $LN7@Arbitrate:
 	push	125					; 0000007dH
-	push	OFFSET $SG144552
-	push	OFFSET $SG144553
+	push	OFFSET $SG144557
+	push	OFFSET $SG144558
 	call	__wassert
 	add	esp, 12					; 0000000cH
 $LN8@Arbitrate:
@@ -18242,7 +18242,7 @@ _this$ = -4						; size = 4
 ?isPossessed@Raven_Bot@@QBE_NXZ PROC			; Raven_Bot::isPossessed, COMDAT
 ; _this$ = ecx
 
-; 155  :   bool          isPossessed()const{return m_bPossessed;}
+; 158  :   bool          isPossessed()const{return m_bPossessed;}
 
 	push	ebp
 	mov	ebp, esp
@@ -18250,7 +18250,7 @@ _this$ = -4						; size = 4
 	mov	DWORD PTR [ebp-4], -858993460		; ccccccccH
 	mov	DWORD PTR _this$[ebp], ecx
 	mov	eax, DWORD PTR _this$[ebp]
-	mov	al, BYTE PTR [eax+237]
+	mov	al, BYTE PTR [eax+245]
 	mov	esp, ebp
 	pop	ebp
 	ret	0

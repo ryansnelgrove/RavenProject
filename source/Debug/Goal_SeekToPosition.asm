@@ -10,10 +10,10 @@ INCLUDELIB LIBCMTD
 INCLUDELIB OLDNAMES
 
 CONST	SEGMENT
-$SG154851 DB	'BOT ', 00H
-$SG154853 DB	00H
+$SG154856 DB	'BOT ', 00H
+$SG154858 DB	00H
 	ORG $+2
-$SG154852 DB	' IS STUCK!!', 00H
+$SG154857 DB	' IS STUCK!!', 00H
 	ORG $+4
 _Pi	DQ	0400921f9f01b866er		; 3.14159
 _colors	DD	0ffH
@@ -18817,11 +18817,11 @@ _this$ = -4						; size = 4
 	mov	ecx, DWORD PTR [edx+8]
 	call	?ID@BaseGameEntity@@QBEHXZ		; BaseGameEntity::ID
 	mov	DWORD PTR $T1[ebp], eax
-	push	OFFSET $SG154853
-	push	OFFSET $SG154852
+	push	OFFSET $SG154858
+	push	OFFSET $SG154857
 	lea	eax, DWORD PTR $T1[ebp]
 	push	eax
-	push	OFFSET $SG154851
+	push	OFFSET $SG154856
 	call	?Instance@DebugConsole@@SAPAV1@XZ	; DebugConsole::Instance
 	mov	ecx, eax
 	call	??$?6$$BY04$$CBD@DebugConsole@@QAEAAV0@AAY04$$CBD@Z ; DebugConsole::operator<<<char const [5]>
@@ -19411,7 +19411,7 @@ _this$ = -4						; size = 4
 ?GetSteering@Raven_Bot@@QAEQAVRaven_Steering@@XZ PROC	; Raven_Bot::GetSteering, COMDAT
 ; _this$ = ecx
 
-; 204  :   Raven_Steering* const              GetSteering(){return m_pSteering;}
+; 207  :   Raven_Steering* const              GetSteering(){return m_pSteering;}
 
 	push	ebp
 	mov	ebp, esp
@@ -19419,7 +19419,7 @@ _this$ = -4						; size = 4
 	mov	DWORD PTR [ebp-4], -858993460		; ccccccccH
 	mov	DWORD PTR _this$[ebp], ecx
 	mov	eax, DWORD PTR _this$[ebp]
-	mov	eax, DWORD PTR [eax+160]
+	mov	eax, DWORD PTR [eax+164]
 	mov	esp, ebp
 	pop	ebp
 	ret	0
